@@ -262,13 +262,15 @@ wordle();
 function generateScore () {
     let output = `Emojile ${puzzleNumber} ${guessesList.length > guesses ? 'X' : guessesList.length}/${guesses}\n`
     output += guessesList.map(g => {
-        return `:${g.split('').map((char, i) => {
+        let combo = `${g.split('').map((char, i) => {
             if (correctWord[i] == char) return '🟩';
             if (correctWord.split('').includes(char)) return '🟨';
             return '⬛';
-        }).join('')}:`
+        }).join('')}`;
+        while (combo != correctWord.length) { combo += '⬛' }
+        return `:${combo}:`; 
     }).join('\n');
-    output += `\nhttps://emojile.dino.icu`;
+    output += `\nhttps://emojile.xyz`;
     return output;
 }
 
